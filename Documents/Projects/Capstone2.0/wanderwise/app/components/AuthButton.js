@@ -9,12 +9,12 @@ export default function AuthButtons() {
 
       <SignedOut>
         <SignInButton mode="modal">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mr-5">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mr-5 cursor-pointer">
             Login
           </button>
         </SignInButton>
         <SignUpButton mode="modal">
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded cursor-pointer">
             Sign Up
           </button>
         </SignUpButton>
