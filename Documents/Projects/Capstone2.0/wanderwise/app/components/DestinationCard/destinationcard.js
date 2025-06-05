@@ -24,7 +24,7 @@ const DestinationCard = ({ destination, index = 0 }) => {
 
   return (
     <Link
-      href={`/destinations/${destination.id}`}
+      href={`/destination/${destination.id}`}
       className="group animate-fade-in rounded-xl overflow-hidden relative"
       style={{ animationDelay: `${delay}ms` }}
     >
@@ -33,7 +33,7 @@ const DestinationCard = ({ destination, index = 0 }) => {
         alt={destination.name}
         className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-t" />
 
       {/* Favorite Button */}
       <button
@@ -45,10 +45,10 @@ const DestinationCard = ({ destination, index = 0 }) => {
       </button>
 
       {/* Destination Info */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 text-white flex justify-between items-end">
+      <div className="absolute bottom-0 left-0 right-0 p-4 text-white flex justify-between items-end ">
         <div>
-          <h3 className="text-xl font-bold">{destination.name}</h3>
-          <p className="text-sm text-gray-200">{destination.country}</p>
+          <h3 className="text-xl font-bold inline-flex items-center px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white text-sm">{destination.name}</h3>
+          <p className="text-sm text-gray-200 inline-flex items-center px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white text-sm">{destination.country}</p>
         </div>
         <span className="bg-white/20 text-xs px-2 py-1 rounded-full">{destination.rating} ★</span>
       </div>

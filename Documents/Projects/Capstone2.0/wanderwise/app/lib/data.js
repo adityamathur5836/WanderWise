@@ -55,7 +55,7 @@ export const featuredDestinations = [
     name: "Marrakech",
     country: "Morocco",
     description: "Lose yourself in labyrinthine medinas, bustling souks, and the rich colors and scents of this North African gem.",
-    image: "https://images.unsplash.com/photo-1597212720418-203156592f58?auto=format&fit=crop&w=2400&q=80",
+    image: "https://images.unsplash.com/photo-1716146743408-474521ee8039?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyYWtlc2h8ZW58MHx8MHx8fDA%3D",
     rating: 4.4,
     priceLevel: "$$",
     isTrending: false
@@ -153,7 +153,7 @@ export const hotels = [
     id: 103,
     name: "Amalfi Seaside Resort",
     destinationId: 3,
-    image: "https://images.unsplash.com/photo-1544097797-2a49661e2a2e?auto=format&fit=crop&w=2400&q=80",
+    image: "https://plus.unsplash.com/premium_photo-1722927254497-ed40548c5b85?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW1hbGZpJTIwc2Vhc2lkZSUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D",
     rating: 4.8,
     pricePerNight: 520,
     description: "Elegant resort carved into the cliffs...",
