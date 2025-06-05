@@ -38,7 +38,7 @@ const FeaturedDestinations = () => {
             <p className="text-gray-600 mt-2">Explore our handpicked destinations perfect for your next adventure</p>
           </div>
 
-          <Link href="/pages/destination" className="flex items-center font-medium text-wanderwise-primary hover:text-wanderwise-secondary transition-colors animate-on-scroll">
+          <Link href="/pages/destinations" className="flex items-center font-medium text-wanderwise-primary hover:text-wanderwise-secondary transition-colors animate-on-scroll">
             View all destinations
             <ChevronRight className="ml-1 w-5 h-5" />
           </Link>

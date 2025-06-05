@@ -24,7 +24,7 @@ const DestinationCard = ({ destination, index = 0 }) => {
 
   return (
     <Link
-      href={`/destination/${destination.id}`}
+      href={`/destinations/${destination.id}`}
       className="group animate-fade-in rounded-xl overflow-hidden relative"
       style={{ animationDelay: `${delay}ms` }}
     >

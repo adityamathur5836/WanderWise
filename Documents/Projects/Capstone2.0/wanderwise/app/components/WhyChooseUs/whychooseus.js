@@ -4,22 +4,22 @@ import { MapPin, Star, Shield, Globe } from "lucide-react";
 
 const features = [
   {
-    icon: <MapPin className="w-12 h-12 text-wanderwise-primary" />,
+    icon: <MapPin className="w-12 h-12 text-blue-700" />,
     title: "Expertly Curated",
     description: "Our travel experts handpick only the most breathtaking destinations worth your precious vacation time."
   },
   {
-    icon: <Star className="w-12 h-12 text-wanderwise-secondary" />,
+    icon: <Star className="w-12 h-12 text-yellow-500" />,
     title: "Tailored Experiences",
     description: "Every itinerary is customized to your interests, budget, and travel style for the perfect journey."
   },
   {
-    icon: <Shield className="w-12 h-12 text-wanderwise-accent" />,
+    icon: <Shield className="w-12 h-12 text-green-700" />,
     title: "Worry-Free Travel",
     description: "From 24/7 support to flexible bookings, we've got you covered before, during, and after your trip."
   },
   {
-    icon: <Globe className="w-12 h-12 text-wanderwise-primary" />,
+    icon: <Globe className="w-12 h-12 text-blue-700" />,
     title: "Local Expertise",
     description: "Discover hidden gems and authentic experiences with our network of local guides and partners."
   }

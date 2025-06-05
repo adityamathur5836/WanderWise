@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
-import  DestinationCard from "../../components/DestinationCard/destinationcard";
+import DestinationCard from "../../components/DestinationCardcard";
 import { allDestinations } from "../../lib/data";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/footer";

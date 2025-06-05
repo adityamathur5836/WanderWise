@@ -13,7 +13,7 @@ const FavoritesPage = () => {
   const [favoriteDestinations, setFavoriteDestinations] = useState([]);
   const [favoriteHotels, setFavoriteHotels] = useState([]);
   const [favoriteActivities, setFavoriteActivities] = useState([]);
-  const [activeTab, setActiveTab] = useState("destinations");
+  const [activeTab, setActiveTab] = useState("destination");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,7 +21,7 @@ const FavoritesPage = () => {
   }, []);
 
   const loadFavorites = () => {
-    setFavoriteDestinations(getFavorites("destination"));
+    setFavoriteDestinations(getFavorites("destinations"));
     setFavoriteHotels(getFavorites("hotel"));
     setFavoriteActivities(getFavorites("activity"));
   };
