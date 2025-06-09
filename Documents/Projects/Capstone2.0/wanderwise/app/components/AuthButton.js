@@ -2,7 +2,7 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@cl
 
 export default function AuthButtons() {
   return (
-    <div className='z-11 mr-10 mt-auto mb-auto'>
+    <div className='z-11 mr-10 mt-1 mb-auto ml-2'>
       <SignedIn className = 'z-11 mr-20'>
         <UserButton afterSignOutUrl="/"/>
       </SignedIn>

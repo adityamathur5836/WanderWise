@@ -7,7 +7,7 @@ import { Input } from "../../components/ui/input";
 import { Progress } from "../../components/ui/progress";
 import { Button } from "../../components/ui/button"
 import Footer from "../../components/Footer/footer";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/navbar";
 
 const BudgetEstimatorPage = () => {
   const [travelers, setTravelers] = useState(2);

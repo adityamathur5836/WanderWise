@@ -5,17 +5,17 @@ import { isInFavorites, saveToFavorites, removeFromFavorites } from "../../lib/l
 import { toast } from "../ui/sonner";
 
 const DestinationCard = ({ destination, index = 0 }) => {
-  const [favorite, setFavorite] = useState(isInFavorites("destination", destination.id));
+  const [favorite, setFavorite] = useState(isInFavorites("destinations", destination.id));
   const delay = index * 150;
 
   const toggleFavorite = (e) => {
     e.preventDefault();
 
     if (favorite) {
-      removeFromFavorites("destination", destination.id);
+      removeFromFavorites("destinations", destination.id);
       toast.success("Removed from favorites");
     } else {
-      saveToFavorites("destination", destination);
+      saveToFavorites("destinations", destination);
       toast.success("Added to favorites");
     }
 
@@ -24,7 +24,7 @@ const DestinationCard = ({ destination, index = 0 }) => {
 
   return (
     <Link
-      href={`/destinations/${destination.id}`}
+      href={`/destination/${destination.id}`}
       className="group animate-fade-in rounded-xl overflow-hidden relative"
       style={{ animationDelay: `${delay}ms` }}
     >
@@ -55,7 +55,7 @@ const DestinationCard = ({ destination, index = 0 }) => {
 
       {/* Trending Tag */}
       {destination.isTrending && (
-        <div className="absolute top-4 left-4 bg-wanderwise-secondary text-white text-xs font-medium px-2.5 py-1 rounded">
+        <div className="absolute top-4 left-4 bg-orange-500 text-white text-xs font-extrabold px-2.5 py-1 rounded">
           Trending
         </div>
       )}

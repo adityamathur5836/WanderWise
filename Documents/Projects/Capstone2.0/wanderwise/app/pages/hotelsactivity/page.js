@@ -5,7 +5,7 @@ import { Search, MapPin, Star, Heart } from "lucide-react";
 import { allDestinations, hotels, activities } from "../../lib/data";
 import { isInFavorites, saveToFavorites, removeFromFavorites } from "../../lib/localStorage";
 import { toast } from "../../components/ui/sonner";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
 
 const HotelsActivitiesPage = () => {
@@ -69,9 +69,9 @@ const HotelsActivitiesPage = () => {
   });
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 bg-blue-50">
         <Navbar />
-      <div className="bg-wanderwise-light-blue py-12">
+      <div className=" py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold text-gray-900 mb-4 animate-fade-in">
             {activeTab === "hotel" ? "Hotels & Accommodations" : "Activities & Experiences"}
@@ -83,7 +83,7 @@ const HotelsActivitiesPage = () => {
                 onClick={() => setActiveTab("hotel")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeTab === "hotel"
-                    ? "bg-wanderwise-primary text-white"
+                    ? "bg-blue-700 text-white"
                     : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
               >
@@ -93,7 +93,7 @@ const HotelsActivitiesPage = () => {
                 onClick={() => setActiveTab("activity")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeTab === "activity"
-                    ? "bg-wanderwise-secondary text-white"
+                    ? "bg-white text-white"
                     : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
               >
@@ -107,7 +107,7 @@ const HotelsActivitiesPage = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${activeTab === "hotel" ? "hotels" : "activities"}...`}
-                className="w-full py-2 px-4 pr-10 rounded-full shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-wanderwise-primary"
+                className="w-full py-2 px-4 pr-10 rounded-full shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-wanderwise-primary bg-white"
               />
               <Search className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" />
             </div>
@@ -187,7 +187,7 @@ const HotelsActivitiesPage = () => {
                         <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
                         {destination ? (
                             <Link 
-                            href={`/destinations/${destination.id}`}
+                            href={`/destination/${destination.id}`}
                             className="text-sm text-gray-600 hover:text-wanderwise-secondary"
                             >
                             {destination.name}, {destination.country}
@@ -210,9 +210,12 @@ const HotelsActivitiesPage = () => {
                             </span>
                             <span className="text-sm text-gray-500"> / night</span>
                           </div>
-                          <button className="bg-wanderwise-primary text-white px-3 py-1.5 rounded hover:bg-blue-600 transition-colors text-sm">
+                          <Link
+                            href={`/hotel/${hotel.id}`}
+                            className="bg-blue-700 text-white px-3 py-1.5 rounded hover:bg-blue-600 transition-colors text-sm"
+                          >
                             View Details
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -238,7 +241,11 @@ const HotelsActivitiesPage = () => {
                   const isFavorite = favoriteStatus[`activity-${activity.id}`] || false;
 
                   return (
-                    <div key={activity.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all animate-fade-in">
+                    <Link
+                      key={activity.id}
+                      href={`/activity/${activity.id}`}
+                      className="block bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all animate-fade-in"
+                    >
                       <div className="relative h-48">
                         <img 
                           src={activity.image} 
@@ -249,7 +256,11 @@ const HotelsActivitiesPage = () => {
                           {activity.category.charAt(0).toUpperCase() + activity.category.slice(1)}
                         </div>
                         <button
-                          onClick={() => toggleFavorite("activity", activity)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleFavorite("activity", activity);
+                          }}
                           className="absolute top-3 right-3 p-2 bg-white/80 hover:bg-white rounded-full transition-colors z-10"
                         >
                           <Heart className={`w-5 h-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-700"}`} />
@@ -259,8 +270,9 @@ const HotelsActivitiesPage = () => {
                         <div className="flex items-center mb-2">
                           <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
                           <Link 
-                            href={`/destinations/${destination?.id}`}
+                            href={`/destination/${destination?.id}`}
                             className="text-sm text-gray-600 hover:text-wanderwise-secondary"
+                            onClick={(e) => e.stopPropagation()}
                           >
                             {destination?.name}, {destination?.country}
                           </Link>
@@ -282,12 +294,12 @@ const HotelsActivitiesPage = () => {
                             </span>
                             <span className="text-sm text-gray-500"> per person</span>
                           </div>
-                          <button className="bg-wanderwise-secondary text-white px-3 py-1.5 rounded hover:bg-orange-500 transition-colors text-sm">
+                          <div className="bg-wanderwise-secondary text-white px-3 py-1.5 rounded text-sm">
                             Book Now
-                          </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>

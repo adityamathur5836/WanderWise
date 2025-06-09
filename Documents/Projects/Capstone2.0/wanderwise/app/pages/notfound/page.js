@@ -1,4 +1,4 @@
-import { Link } from "next/link";
+import Link from "next/link";
 import { useEffect } from "react";
 import { HomeIcon, ArrowRight } from "lucide-react";
 
@@ -25,7 +25,7 @@ const NotFound = () => {
             Return Home
           </Link>
           <Link
-            href="/destinations"
+            href="/pages/destination"
             className="flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 bg-white text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
             Explore Destinations

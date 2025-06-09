@@ -22,7 +22,7 @@ const HeroSection = () => {
     e.preventDefault();
     if (searchInput.trim()) {
       // Use Next.js router to navigate to the destination page
-      router.push(`/destination?search=${encodeURIComponent(searchInput)}`);
+      router.push(`/pages/destination?search=${encodeURIComponent(searchInput)}`);
     }
   };
 

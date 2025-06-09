@@ -22,14 +22,15 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Destinations", path: "/pages" },
+    { name: "Destinations", path: "/pages/destination" },
     { name: "Hotels & Activities", path: "/pages/hotelsactivity" },
     { name: "Budget Estimator", path: "/pages/budgetestimator" },
+    { name: 'Favorites', path: "/pages/favorites"}
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300  ${
         scrolled || isMenuOpen || pathname !== "/"
           ? "bg-white shadow-md py-3"
           : "bg-transparent py-5"
@@ -68,29 +69,8 @@ const Navbar = () => {
             </Link>
           ))}
         </nav>
-
-        {/* Right Side: Icons + Auth */}
-        <div className="hidden md:flex items-center gap-4">
-          <div
-            className={`flex items-center gap-4 px-4 py-2 rounded-full ${
-              scrolled || pathname !== "/"
-                ? "bg-white text-wanderwise-primary"
-                : "bg-black/30 text-white"
-            } backdrop-blur-sm`}
-          >
-            <Link
-              href="/search"
-              className="hover:text-wanderwise-secondary"
-            >
-              <Search className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/pages/favorites"
-              className="hover:text-wanderwise-secondary"
-            >
-              <Heart className="w-5 h-5" />
-            </Link>
-          </div>
+        
+        <div className="mt-1">
           <AuthButtons />
         </div>
 

@@ -11,7 +11,7 @@ export const saveToFavorites = (type, item) => {
       return true; // Successfully added
     }
   
-    return false; // Already exists
+    return false; // Item already exists
   };
   
   // Remove an item from favorites
