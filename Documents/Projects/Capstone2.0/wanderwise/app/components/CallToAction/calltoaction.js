@@ -22,13 +22,13 @@ const CallToAction = () => {
             Start planning your dream trip today with our personalized recommendations and expert travel guides.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/destination" passHref legacyBehavior>
+            <Link href="/pages/destination" passHref legacyBehavior>
               <a className="inline-flex items-center justify-center px-6 py-3 bg-white text-wanderwise-primary font-medium rounded-lg hover:bg-gray-100 transition-colors">
                 Explore destinations
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Link>
-            <Link href="/budget" passHref legacyBehavior>
+            <Link href="/pages/budgetestimator" passHref legacyBehavior>
               <a className="inline-flex items-center justify-center px-6 py-3 bg-wanderwise-secondary text-white font-medium rounded-lg hover:bg-orange-500 transition-colors">
                 Plan your budget
                 <ArrowRight className="ml-2 w-5 h-5" />

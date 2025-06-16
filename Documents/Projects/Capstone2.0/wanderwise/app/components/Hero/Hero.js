@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Use Next.js' useRouter hook
+import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
 const HeroSection = () => {
   const [searchInput, setSearchInput] = useState("");
   const [loaded, setLoaded] = useState(false);
-  const router = useRouter(); // Use the router hook from Next.js
+  const router = useRouter();
 
   useEffect(() => {
     // Add animation delay after component mounts
@@ -21,7 +21,6 @@ const HeroSection = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchInput.trim()) {
-      // Use Next.js router to navigate to the destination page
       router.push(`/pages/destination?search=${encodeURIComponent(searchInput)}`);
     }
   };

@@ -2,7 +2,12 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'wanderwise-primary': '#2563eb', // blue-600
+        'wanderwise-secondary': '#f59e42', // orange-500
+      },
+    },
   },
   plugins: [],
 }

@@ -52,13 +52,13 @@ const BudgetEstimatorPage = () => {
       "private": 1.8
     }[transportation] || 1;
     
-    // Base costs per person per day (in USD)
+    // Base costs per person per day (in INR)
     const baseCosts = {
-      accommodation: 80,
-      food: 40,
-      transportation: 20,
-      activities: 30,
-      other: 15
+      accommodation: 6640, // 80 * 83
+      food: 3320,          // 40 * 83
+      transportation: 1660, // 20 * 83
+      activities: 2490,    // 30 * 83
+      other: 1245          // 15 * 83
     };
     
     // Calculate individual costs
@@ -250,7 +250,7 @@ const BudgetEstimatorPage = () => {
                   <div className="space-y-6 animate-slide-in">
                     <div>
                       <p className="text-4xl md:text-5xl font-bold text-white mb-2">
-                        ${estimate.total.toLocaleString()}
+                        ₹{estimate.total.toLocaleString()}
                       </p>
                       <p className="text-white/80 text-lg">Total estimated budget</p>
                     </div>
@@ -263,7 +263,7 @@ const BudgetEstimatorPage = () => {
                         <div>
                           <div className="flex justify-between items-center mb-1">
                             <span>Accommodation</span>
-                            <span className="font-medium">${estimate.accommodation.toLocaleString()}</span>
+                            <span className="font-medium">₹{estimate.accommodation.toLocaleString()}</span>
                           </div>
                           <Progress value={getPercentage(estimate.accommodation)} className="h-2 bg-white/20" />
                         </div>
@@ -271,7 +271,7 @@ const BudgetEstimatorPage = () => {
                         <div>
                           <div className="flex justify-between items-center mb-1">
                             <span>Food & Drinks</span>
-                            <span className="font-medium">${estimate.food.toLocaleString()}</span>
+                            <span className="font-medium">₹{estimate.food.toLocaleString()}</span>
                           </div>
                           <Progress value={getPercentage(estimate.food)} className="h-2 bg-white/20" />
                         </div>
@@ -279,7 +279,7 @@ const BudgetEstimatorPage = () => {
                         <div>
                           <div className="flex justify-between items-center mb-1">
                             <span>Transportation</span>
-                            <span className="font-medium">${estimate.transportation.toLocaleString()}</span>
+                            <span className="font-medium">₹{estimate.transportation.toLocaleString()}</span>
                           </div>
                           <Progress value={getPercentage(estimate.transportation)} className="h-2 bg-white/20" />
                         </div>
@@ -287,7 +287,7 @@ const BudgetEstimatorPage = () => {
                         <div>
                           <div className="flex justify-between items-center mb-1">
                             <span>Activities & Tours</span>
-                            <span className="font-medium">${estimate.activities.toLocaleString()}</span>
+                            <span className="font-medium">₹{estimate.activities.toLocaleString()}</span>
                           </div>
                           <Progress value={getPercentage(estimate.activities)} className="h-2 bg-white/20" />
                         </div>
@@ -295,7 +295,7 @@ const BudgetEstimatorPage = () => {
                         <div>
                           <div className="flex justify-between items-center mb-1">
                             <span>Miscellaneous</span>
-                            <span className="font-medium">${estimate.other.toLocaleString()}</span>
+                            <span className="font-medium">₹{estimate.other.toLocaleString()}</span>
                           </div>
                           <Progress value={getPercentage(estimate.other)} className="h-2 bg-white/20" />
                         </div>
@@ -304,11 +304,11 @@ const BudgetEstimatorPage = () => {
                       <div className="border-t border-white/20 pt-4 mt-6">
                         <div className="flex justify-between items-center">
                           <span className="font-medium">Per Person</span>
-                          <span className="font-medium">${Math.round(estimate.total / travelers).toLocaleString()}</span>
+                          <span className="font-medium">₹{Math.round(estimate.total / travelers).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-medium">Per Day</span>
-                          <span className="font-medium">${Math.round(estimate.total / days).toLocaleString()}</span>
+                          <span className="font-medium">₹{Math.round(estimate.total / days).toLocaleString()}</span>
                         </div>
                       </div>
                     </div>

@@ -14,21 +14,52 @@ const HotelsActivitiesPage = () => {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [favoriteStatus, setFavoriteStatus] = useState({});
+  const [amadeusHotels, setAmadeusHotels] = useState([]);
+  const [amadeusLoading, setAmadeusLoading] = useState(false);
+  const [amadeusError, setAmadeusError] = useState(null);
+
+  const filteredHotels = hotels.filter((hotel) => {
+    const matchesDestination = selectedDestination === "all" || hotel.destinationId === selectedDestination;
+    const matchesSearch = !searchQuery ||
+      hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      hotel.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesDestination && matchesSearch;
+  });
+
+  const filteredActivities = activities.filter((activity) => {
+    const matchesDestination = selectedDestination === "all" || activity.destinationId === selectedDestination;
+    const matchesCategory = categoryFilter === "all" || activity.category === categoryFilter;
+    const matchesSearch = !searchQuery ||
+      activity.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      activity.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesDestination && matchesCategory && matchesSearch;
+  });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const initFavorites = {};
-
-    hotels.forEach((hotel) => {
-      initFavorites[`hotel-${hotel.id}`] = isInFavorites("hotel", hotel.id);
-    });
-
-    activities.forEach((activity) => {
-      initFavorites[`activity-${activity.id}`] = isInFavorites("activity", activity.id);
-    });
-
-    setFavoriteStatus(initFavorites);
+    setAmadeusLoading(true);
+    fetch("/api/amadeus-hotels")
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        const hotelsFromAmadeus = (data.data || []).map((item) => ({
+          id: item.hotel.hotelId,
+          name: item.hotel.name,
+          image: item.hotel.media && item.hotel.media[0] ? item.hotel.media[0].uri : "/placeholder.jpg",
+          description: item.hotel.description?.text || "No description available.",
+          rating: item.hotel.rating || 0,
+          amenities: item.hotel.amenities || [],
+          pricePerNight: item.offers && item.offers[0] ? item.offers[0].price.total : null,
+          destinationId: null, // Amadeus hotels may not have this, so set to null
+          isAmadeus: true,
+        }));
+        setAmadeusHotels(hotelsFromAmadeus);
+        setAmadeusLoading(false);
+      })
+      .catch((err) => {
+        setAmadeusError("Failed to load Amadeus hotels");
+        setAmadeusLoading(false);
+      });
   }, []);
 
   const toggleFavorite = (type, item) => {
@@ -49,23 +80,13 @@ const HotelsActivitiesPage = () => {
     });
   };
 
-  const filteredHotels = hotels.filter((hotel) => {
+  const allHotelsCombined = [...hotels, ...amadeusHotels];
+  const filteredHotelsCombined = allHotelsCombined.filter((hotel) => {
     const matchesDestination = selectedDestination === "all" || hotel.destinationId === selectedDestination;
     const matchesSearch = !searchQuery ||
       hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       hotel.description.toLowerCase().includes(searchQuery.toLowerCase());
-
     return matchesDestination && matchesSearch;
-  });
-
-  const filteredActivities = activities.filter((activity) => {
-    const matchesDestination = selectedDestination === "all" || activity.destinationId === selectedDestination;
-    const matchesCategory = categoryFilter === "all" || activity.category === categoryFilter;
-    const matchesSearch = !searchQuery ||
-      activity.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      activity.description.toLowerCase().includes(searchQuery.toLowerCase());
-
-    return matchesDestination && matchesCategory && matchesSearch;
   });
 
   return (
@@ -159,14 +180,19 @@ const HotelsActivitiesPage = () => {
         {activeTab === "hotel" ? (
           <>
             <h2 className="text-2xl font-semibold mb-6">
-              {filteredHotels.length} {filteredHotels.length === 1 ? "Hotel" : "Hotels"} Found
+              {filteredHotelsCombined.length} {filteredHotelsCombined.length === 1 ? "Hotel" : "Hotels"} Found
             </h2>
-            {filteredHotels.length > 0 ? (
+            {amadeusLoading && (
+              <div className="text-center py-4 text-blue-600">Loading Amadeus hotels...</div>
+            )}
+            {amadeusError && (
+              <div className="text-center py-4 text-red-600">{amadeusError}</div>
+            )}
+            {filteredHotelsCombined.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredHotels.map((hotel) => {
+                {filteredHotelsCombined.map((hotel) => {
                   const destination = allDestinations.find(d => d.id === hotel.destinationId);
                   const isFavorite = favoriteStatus[`hotel-${hotel.id}`] || false;
-
                   return (
                     <div key={hotel.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all animate-fade-in">
                       <div className="relative h-48">
@@ -181,37 +207,40 @@ const HotelsActivitiesPage = () => {
                         >
                           <Heart className={`w-5 h-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-700"}`} />
                         </button>
+                        {hotel.isAmadeus && (
+                          <span className="absolute bottom-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">Amadeus</span>
+                        )}
                       </div>
                       <div className="p-4">
-                      <div className="flex items-center mb-2">
-                        <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
-                        {destination ? (
+                        <div className="flex items-center mb-2">
+                          <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
+                          {destination ? (
                             <Link 
-                            href={`/destination/${destination.id}`}
-                            className="text-sm text-gray-600 hover:text-wanderwise-secondary"
+                              href={`/destination/${destination.id}`}
+                              className="text-sm text-gray-600 hover:text-wanderwise-secondary"
                             >
-                            {destination.name}, {destination.country}
+                              {destination.name}, {destination.country}
                             </Link>
-                        ) : (
+                          ) : (
                             <span className="text-sm text-gray-500">Unknown Destination</span>
-                        )}
+                          )}
                         </div>
                         <h3 className="text-lg font-semibold mb-2">{hotel.name}</h3>
                         <div className="flex items-center text-sm text-gray-600 mb-3">
                           <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 mr-1" />
                           <span>{hotel.rating}/5</span>
                           <span className="mx-2">•</span>
-                          <span>{hotel.amenities.slice(0, 1).join(", ")} & more</span>
+                          <span>{hotel.amenities?.slice(0, 1).join(", ")} & more</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <div>
                             <span className="text-lg font-bold text-wanderwise-primary">
-                              ${hotel.pricePerNight}
+                              {hotel.pricePerNight ? `$${hotel.pricePerNight}` : "-"}
                             </span>
                             <span className="text-sm text-gray-500"> / night</span>
                           </div>
                           <Link
-                            href={`/hotel/${hotel.id}`}
+                            href={hotel.isAmadeus ? "#" : `/hotel/${hotel.id}`}
                             className="bg-blue-700 text-white px-3 py-1.5 rounded hover:bg-blue-600 transition-colors text-sm"
                           >
                             View Details
