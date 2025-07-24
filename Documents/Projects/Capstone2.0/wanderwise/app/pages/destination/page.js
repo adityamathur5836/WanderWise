@@ -1,173 +1,169 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { Search, Filter, MapPin } from "lucide-react";
-import DestinationCard from "../../components/DestinationCard/destinationcard";
-import { allDestinations } from "../../lib/data";
-import Footer from "../../components/Footer/footer";
+import { useState, useEffect, useMemo } from "react";
+import { Search} from 'lucide-react';
 import Navbar from "../../components/Navbar/navbar";
+import DestinationCard from "../../components/DestinationCard/destinationcard.jsx";
 import Image from "next/image";
+import { getAllDestinations } from "@/app/lib/data";
 
-const DestinationsPage = () => {
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("search") || "";
-  const [filteredDestinations, setFilteredDestinations] = useState([]);
-  const [query, setQuery] = useState(searchQuery);
+const PAGE_SIZE = 9;
 
+export default function DestinationsPage() {
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('name');
+  const [page, setPage] = useState(0);
+
+  // Fetch cities from your Amadeus proxy API
   useEffect(() => {
-    window.scrollTo(0, 0);
-    if (searchQuery) {
-      setQuery(searchQuery);
-      filterDestinations(searchQuery);
-    } else {
-      setFilteredDestinations(allDestinations);
-    }
-  }, [searchQuery]);
+    const fetchDestinations = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+  
+        const data = await getAllDestinations();
+        setDestinations(data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setError(err.message);
+        setDestinations([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchDestinations();
+  }, []);
 
-  const filterDestinations = (query) => {
-    const lowercasedQuery = query.toLowerCase();
-    if (!lowercasedQuery.trim()) {
-      setFilteredDestinations(allDestinations);
-      return;
-    }
-    const filtered = allDestinations.filter((destination) =>
-      destination.name.toLowerCase().includes(lowercasedQuery) ||
-      destination.country.toLowerCase().includes(lowercasedQuery) ||
-      destination.description.toLowerCase().includes(lowercasedQuery)
-    );
-    setFilteredDestinations(filtered);
-  };
+  // Filter & sort logic
+  const filteredDestinations = useMemo(() => {
+    let filtered = destinations;
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    filterDestinations(query);
-  };
+    // Search filter
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(dest =>
+        dest.name.toLowerCase().includes(q) || dest.country.toLowerCase().includes(q)
+      );
+    }
+
+    // Sorting
+    switch (sortBy) {
+      case 'name':
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'country':
+        filtered.sort((a, b) => a.country.localeCompare(b.country));
+        break;
+      case 'rating':
+        filtered.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+        break;
+      case 'price':
+        filtered.sort((a, b) => a.priceLevel - b.priceLevel);
+        break;
+    }
+
+    return filtered;
+  }, [destinations, searchQuery, sortBy]);
+
+  const totalPages = Math.ceil(filteredDestinations.length / PAGE_SIZE);
+  const visibleDestinations = filteredDestinations.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
-        <Navbar />
-      <div className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=7360&q=80"
-            alt="Beautiful landscape"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-wanderwise-primary/20 to-wanderwise-secondary/20"></div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
+      <Navbar />
 
-        <div className="container mx-auto px-4 text-center relative z-10 pt-16">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-fade-in drop-shadow-lg">
-              Discover Your Next
-              <span className="block text-wanderwise-secondary">Adventure</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto animate-fade-in leading-relaxed drop-shadow-md">
-              From pristine beaches to majestic mountains, explore handpicked destinations that will create memories to last a lifetime
-            </p>
-
-            <form onSubmit={handleSearch} className="search-bar mx-auto mb-8">
-              <div className="relative flex max-w-4xl mx-auto">
-                <div className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-500">
-                  <Search className="w-6 h-6" />
-                </div>
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search destinations, countries, or experiences..."
-                  className="w-full py-5 pl-16 pr-32 rounded-full shadow-2xl text-gray-700 focus:outline-none focus:ring-4 focus:ring-wanderwise-primary/30 backdrop-blur-sm bg-white/95 text-lg"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-2 bg-gradient-to-r from-wanderwise-primary to-blue-600 text-black px-8 py-3 rounded-full hover:from-blue-600 hover:to-wanderwise-primary transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                  aria-label="Search"
-                >
-                  <Search className="w-6 h-6" />
-                </button>
-              </div>
-            </form>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center animate-fade-in">
-                <div className="text-3xl font-bold text-white mb-2">{allDestinations.length}+</div>
-                <div className="text-gray-300">Destinations</div>
-              </div>
-              <div className="text-center animate-fade-in">
-                <div className="text-3xl font-bold text-white mb-2">50+</div>
-                <div className="text-gray-300">Countries</div>
-              </div>
-              <div className="text-center animate-fade-in">
-                <div className="text-3xl font-bold text-white mb-2">1M+</div>
-                <div className="text-gray-300">Happy Travelers</div>
-              </div>
-            </div>
+      {/* Hero Section */}
+      <div className="relative h-[70vh] bg-cover bg-center overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1752503650851-cbc3f8b00679?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D"
+          alt="Travel Hero"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-opacity-20" />
+        <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-6">
+          <h1 className="text-5xl font-bold mb-4">Discover Your Next <span className="text-blue-400 block">Adventure</span></h1>
+          <p className="text-xl mb-6">Explore curated cities from around the world</p>
+          <div className="w-full max-w-xl relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search destinations..."
+              className="bg-white w-full py-3 pl-12 pr-4 rounded-full text-black shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {query ? `Search Results for "${query}"` : "All Destinations"}
-          </h2>
-          <div className="flex items-center justify-center gap-2 text-gray-600">
-            <MapPin className="w-5 h-5" />
-            <span>{filteredDestinations.length} destinations found</span>
+      {/* Filters */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 bg-white rounded-2xl p-6 shadow">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-4 py-2 rounded-xl border border-gray-300"
+          >
+            <option value="name">Sort by Name</option>
+            <option value="country">Sort by Country</option>
+            <option value="rating">Sort by Rating</option>
+            <option value="price">Sort by Price</option>
+          </select>
+          <div className="text-gray-700 font-medium">
+            {filteredDestinations.length} destinations found
           </div>
         </div>
+      </div>
 
-        {filteredDestinations.length > 0 ? (
+      {/* Main Grid */}
+      <div className="max-w-7xl mx-auto px-4 pb-20">
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[300px]">
+            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-600">{error}</div>
+        ) : filteredDestinations.length === 0 ? (
+          <div className="text-center text-gray-500">No destinations found</div>
+        ) : (
           <>
-            <div className="flex justify-between items-center mb-8 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-              <div className="flex items-center gap-4">
-                <button className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Filter className="w-4 h-4" />
-                  Filter
-                </button>
-                <span className="text-sm text-gray-600">Showing {filteredDestinations.length} results</span>
-              </div>
-              <select className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wanderwise-primary">
-                <option>Sort by Popularity</option>
-                <option>Sort by Rating</option>
-                <option>Sort by Name</option>
-              </select>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredDestinations.map((destination, index) => (
-                <div key={destination.id}>
-                  <DestinationCard destination={destination} index={index} />
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {visibleDestinations.map((dest, idx) => (
+                <DestinationCard
+                  key={dest.id}
+                  destination={dest}
+                  index={idx}
+                />
               ))}
             </div>
+
+            {/* Pagination Buttons */}
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-12 space-x-2">
+                {Array.from({ length: totalPages }, (_, idx) => (
+                <button
+                    key={idx}
+                    onClick={() => setPage(idx)}
+                    className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${
+                      idx === page
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-blue-600 border border-blue-600 hover:bg-blue-100"
+                    }`}
+                >
+                    {idx + 1}
+                </button>
+                ))}
+              </div>
+            )}
           </>
-        ) : (
-          <div className="text-center py-20">
-            <div className="bg-white rounded-2xl shadow-lg p-12 max-w-md mx-auto">
-              <div className="text-6xl mb-6">🗺️</div>
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">No destinations found</h2>
-              <p className="text-gray-600 mb-6">
-                Try adjusting your search or explore our featured destinations.
-              </p>
-              <button
-                onClick={() => {
-                  setQuery("");
-                  setFilteredDestinations(allDestinations);
-                }}
-                className="bg-wanderwise-primary text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                Show All Destinations
-              </button>
-            </div>
-          </div>
         )}
       </div>
-      <Footer />
     </div>
   );
-};
-
-export default DestinationsPage;
+}

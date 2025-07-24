@@ -1,8 +1,7 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { Calculator, DollarSign, Users, Calendar, Plane, Home, MapPin, ArrowRight } from "lucide-react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
+import { Calculator, Users, Calendar, Plane, Home, MapPin, ArrowRight } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
 import { Progress } from "../../components/ui/progress";
 import { Button } from "../../components/ui/button"
@@ -214,15 +213,11 @@ const BudgetEstimatorPage = () => {
                   
                   <Button
                     type="submit"
-                    className="w-full mt-6 bg-wanderwise-primary hover:bg-blue-600"
+                    className="w-full mt-6 bg-blue-600 text-white cursor-pointer"
                     disabled={isCalculating}
                   >
                     {isCalculating ? (
                       <span className="flex items-center">
-                        <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
                         Calculating...
                       </span>
                     ) : (
@@ -240,7 +235,7 @@ const BudgetEstimatorPage = () => {
             <div className={`bg-blue-600 text-white p-8 transition-all duration-500 ${showResults ? "opacity-100" : "opacity-90"}`}>
               <CardHeader className="px-0 pt-0 items-center">
                 <CardTitle className="text-2xl font-semibold text-white flex items-center gap-2">
-                  <DollarSign className="w-6 h-6" />
+                  <span className="text-2xl">₹</span>
                   Estimated Budget
                 </CardTitle>
               </CardHeader>

@@ -28,13 +28,13 @@ const testimonials = [
 const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
+  // Remove auto-transition
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveIndex((current) => (current + 1) % testimonials.length);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,15 +60,23 @@ const TestimonialsSection = () => {
     };
   }, []);
 
+  // Handlers for previous/next
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
   return (
     <section className="py-16 bg-wanderwise-light-blue pb-55 shadow-2xl">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-on-scroll">
+        <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900">Traveler Stories</h2>
           <p className="text-gray-600 mt-2">Hear what our community has to say about their WanderWise experiences</p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto animate-on-scroll">
+        <div className="relative max-w-4xl mx-auto">
           {testimonials.map((testimonial, idx) => (
             <div
               key={testimonial.id}
@@ -98,6 +106,25 @@ const TestimonialsSection = () => {
               </div>
             </div>
           ))}
+          {/* Prev/Next Buttons */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 hover:bg-gray-100 transition"
+            aria-label={'Previous testimonial'}
+            style={{zIndex: 20}}
+          >
+            <span className={'sr-only'}>Previous</span>
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d='M15 19l-7-7 7-7'/></svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 hover:bg-gray-100 transition"
+            aria-label={'Next testimonial'}
+            style={{zIndex: 20}}
+          >
+            <span className={'sr-only'}>Next</span>
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d='M9 5l7 7-7 7'/></svg>
+          </button>
         </div>
 
         <div className="flex justify-center mt-8">

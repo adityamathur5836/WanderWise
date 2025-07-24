@@ -14,7 +14,7 @@ export const featuredDestinations = [
       "https://images.unsplash.com/photo-1604145195376-e2c8195adf29?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHNhbnRvcmluaXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.8,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -31,7 +31,7 @@ export const featuredDestinations = [
       "https://images.unsplash.com/photo-1581536763020-d2d7cfdd4df6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGt5b3RvfGVufDB8fDB8fHww"
     ],
     rating: 4.7,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: false
   },
   {
@@ -48,7 +48,7 @@ export const featuredDestinations = [
       "https://plus.unsplash.com/premium_photo-1677494867836-3f56b1261bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFtYWxmaSUyMGNvYXN0fGVufDB8fDB8fHww"
     ],
     rating: 4.9,
-    priceLevel: "$$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -65,7 +65,7 @@ export const featuredDestinations = [
       "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFsaXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.5,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: true
   },
   {
@@ -82,7 +82,7 @@ export const featuredDestinations = [
       "https://images.unsplash.com/photo-1725215763908-83dede205f4d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmV5a2phdmlrfGVufDB8fDB8fHww"
     ],
     rating: 4.6,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: false
   },
   {
@@ -99,7 +99,7 @@ export const featuredDestinations = [
       "https://plus.unsplash.com/premium_photo-1697729885210-41d99b8a8688?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1hcnJha2VjaHxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.4,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: false
   }
 ];
@@ -120,7 +120,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1604145195376-e2c8195adf29?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHNhbnRvcmluaXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.8,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -137,7 +137,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1581536763020-d2d7cfdd4df6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGt5b3RvfGVufDB8fDB8fHww"
     ],
     rating: 4.7,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: false
   },
   {
@@ -154,7 +154,7 @@ export const allDestinations = [
       "https://plus.unsplash.com/premium_photo-1677494867836-3f56b1261bc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFtYWxmaSUyMGNvYXN0fGVufDB8fDB8fHww"
     ],
     rating: 4.9,
-    priceLevel: "$$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -171,7 +171,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFsaXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.5,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: true
   },
   {
@@ -188,7 +188,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1725215763908-83dede205f4d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmV5a2phdmlrfGVufDB8fDB8fHww"
     ],
     rating: 4.6,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: false
   },
   {
@@ -205,7 +205,7 @@ export const allDestinations = [
       "https://plus.unsplash.com/premium_photo-1697729885210-41d99b8a8688?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1hcnJha2VjaHxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.4,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: false
   },
   {
@@ -222,7 +222,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG55Y3xlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.7,
-    priceLevel: "$$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -239,7 +239,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1585061528750-3baca2cb6a10?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNhcGUlMjB0b3dufGVufDB8fDB8fHww"
     ],
     rating: 4.5,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: false
   },
   {
@@ -256,7 +256,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1589932896376-5244c8898269?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJhbmdrb2t8ZW58MHx8MHx8fDA%3D"
     ],
     rating: 4.3,
-    priceLevel: "$",
+    priceLevel: "₹",
     isTrending: true
   },
   {
@@ -273,7 +273,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1589087575290-519f528dfe5e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1hY2h1JTIwcGljY2h1fGVufDB8fDB8fHww"
     ],
     rating: 4.9,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: false
   },
   {
@@ -290,7 +290,7 @@ export const allDestinations = [
       "https://plus.unsplash.com/premium_photo-1697730262092-03c94e7dd8fa?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHN5ZG5leXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.7,
-    priceLevel: "$$$",
+    priceLevel: "₹₹₹",
     isTrending: true
   },
   {
@@ -307,7 +307,7 @@ export const allDestinations = [
       "https://images.unsplash.com/photo-1464790719320-516ecd75af6c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJhcmNlbG9uYXxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.6,
-    priceLevel: "$$",
+    priceLevel: "₹",
     isTrending: false
   }
 ];
@@ -327,7 +327,7 @@ export const hotels = [
       "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=2400&q=80"
     ],
     rating: 4.9,
-    pricePerNight: 450,
+    pricePerNight: 37350,
     description: "Luxurious clifftop villas...",
     amenities: ["Private Pool", "Free WiFi", "Breakfast", "Spa", "Airport Shuttle"]
   },
@@ -344,7 +344,7 @@ export const hotels = [
       "https://images.unsplash.com/photo-1553653924-39b70295f8da?auto=format&fit=crop&w=2400&q=80"
     ],
     rating: 4.7,
-    pricePerNight: 380,
+    pricePerNight: 31530,
     description: "Traditional ryokan offering tatami rooms...",
     amenities: ["Onsen", "Garden", "Traditional Breakfast", "Tea Ceremony", "Yukata Provided"]
   },
@@ -361,7 +361,7 @@ export const hotels = [
       "https://plus.unsplash.com/premium_photo-1722927254497-ed40548c5b85?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW1hbGZpJTIwc2Vhc2lkZSUyMHJlc29ydHxlbnwwfHwwfHx8MA%3D%3D"
     ],
     rating: 4.8,
-    pricePerNight: 520,
+    pricePerNight: 43160,
     description: "Elegant resort carved into the cliffs...",
     amenities: ["Beach Access", "Infinity Pool", "Restaurant", "Bar", "Parking"]
   }
@@ -382,7 +382,7 @@ export const activities = [
       "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?auto=format&fit=crop&w=2400&q=80"
     ],
     rating: 4.9,
-    price: 110,
+    price: 9130,
     duration: "5 hours",
     description: "Sail around the caldera...",
     category: "nature"
@@ -400,7 +400,7 @@ export const activities = [
       "https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=2400&q=80"
     ],
     rating: 4.8,
-    price: 85,
+    price: 7070,
     duration: "Full day",
     description: "Guided tour of Kyoto's most beautiful temples...",
     category: "culture"
@@ -418,22 +418,35 @@ export const activities = [
       "https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?auto=format&fit=crop&w=2400&q=80"
     ],
     rating: 4.7,
-    price: 120,
+    price: 9960,
     duration: "4 hours",
     description: "Learn to prepare authentic Italian dishes...",
     category: "food"
   }
 ];
 
-// Helper Functions
-export const getHotelsByDestination = (destinationId) => {
-  return hotels.filter(hotel => hotel.destinationId === destinationId);
+// API-based Helper Functions for DummyJSON
+
+export const getAllDestinations = async () => {
+  const res = await fetch('https://dummyjson.com/c/be9d-99e5-4b99-b518');
+  const data = await res.json();
+  console.log(data)
+  return Array.isArray(data) ? data : [];
 };
 
-export const getActivitiesByDestination = (destinationId) => {
-  return activities.filter(activity => activity.destinationId === destinationId);
+export const getDestinationById = async (id) => {
+  const destinations = await getAllDestinations();
+  return destinations.find(dest => String(dest.id) === String(id)) || null;
 };
 
-export const getDestinationById = (id) => {
-  return allDestinations.find(destination => destination.id === id);
+// Placeholder: You can implement similar API endpoints for hotels/activities if available
+export const getHotelsByDestination = async (destinationId) => {
+  // No hotels endpoint in DummyJSON, return empty array or implement if you have a hotels API
+  return [];
 };
+
+export const getActivitiesByDestination = async (destinationId) => {
+  // No activities endpoint in DummyJSON, return empty array or implement if you have an activities API
+  return [];
+};
+

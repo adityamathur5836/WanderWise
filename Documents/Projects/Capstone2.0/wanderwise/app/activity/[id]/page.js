@@ -195,7 +195,7 @@ export default function ActivityDetailPage() {
             <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24">
               <div className="mb-6">
                 <div className="text-2xl font-bold text-gray-900 mb-2">
-                  ${activity.price}
+                  ₹{activity.price.toLocaleString()}
                   <span className="text-base font-normal text-gray-600"> per person</span>
                 </div>
                 <div className="text-sm text-gray-600">

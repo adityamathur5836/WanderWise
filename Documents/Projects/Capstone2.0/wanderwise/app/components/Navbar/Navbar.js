@@ -23,7 +23,8 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Destinations", path: "/pages/destination" },
-    { name: "Hotels & Activities", path: "/pages/hotelsactivity" },
+    { name: "Hotels", path: "/pages/hotelspage" },
+    { name: "Activity", path: "/pages/activies"},
     { name: "Budget Estimator", path: "/pages/budgetestimator" },
     { name: 'Favorites', path: "/pages/favorites"}
   ];
@@ -125,7 +126,7 @@ const Navbar = () => {
                   Search
                 </Link>
                 <Link
-                  href="/favorites"
+                  href="/pages/favorites"
                   onClick={() => setIsMenuOpen(false)}
                   className="flex items-center gap-2 text-gray-700"
                 >

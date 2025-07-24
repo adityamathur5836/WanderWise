@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { MapPin, Star, Shield, Globe } from "lucide-react";
 
 const features = [
@@ -26,34 +25,11 @@ const features = [
 ];
 
 const WhyChooseUs = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      elements.forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
-  }, []);
 
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 animate-on-scroll">
+        <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900">Why Choose WanderWise</h2>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
             We're passionate about crafting memorable travel experiences that inspire and delight.
@@ -65,7 +41,7 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-all duration-300 animate-on-scroll"
+              className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-all duration-300"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="mb-4">{feature.icon}</div>
