@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Navbar from "../../../components/Navbar/navbar";
+import Navbar from "../../../components/Navbar/navbar_new";
 import Footer from "../../../components/Footer/footer";
 import { getDestinationById, getHotelsByDestination, getActivitiesByDestination } from "../../../lib/data";
 import { Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
@@ -19,15 +19,32 @@ export default function DestinationDetailPage() {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    if (id) {
-      const destId = Number(id);
-      const dest = getDestinationById(destId);
-      setDestination(dest || null);
-      setHotels(getHotelsByDestination(destId));
-      setActivities(getActivitiesByDestination(destId));
-      setLoading(false);
-      window.scrollTo(0, 0);
-    }
+    if (!id) return;
+  
+    const destId = Number(id);
+  
+    fetch("https://dummyjson.com/c/b549-fc13-48b5-9b9d")
+      .then((res) => res.json())
+      .then((data) => {
+        // Assume the response contains allDestinations, hotels, and activities
+        const destinations = Array.isArray(data.allDestinations) ? data.allDestinations : data;
+        const hotels = Array.isArray(data.hotels) ? data.hotels : data;
+        const activities = Array.isArray(data.activities) ? data.activities : data;
+  
+        const destination = destinations.find((d) => d.id === destId);
+        const filteredHotels = hotels.filter((h) => h.destinationId === destId);
+        const filteredActivities = activities.filter((a) => a.destinationId === destId);
+  
+        setDestination(destination || null);
+        setHotels(filteredHotels);
+        setActivities(filteredActivities);
+        setLoading(false);
+        window.scrollTo(0, 0);
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        setLoading(false);
+      });
   }, [id]);
 
   const nextImage = () => {

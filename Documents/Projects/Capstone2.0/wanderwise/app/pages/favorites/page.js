@@ -7,7 +7,7 @@ import { getFavorites, removeFromFavorites } from "../../lib/localStorage";
 import { allDestinations } from "../../lib/data";
 import { toast } from "../../components/ui/sonner";
 import Footer from "../../components/Footer/footer";
-import Navbar from "../../components/Navbar/navbar";
+import Navbar from "../../components/Navbar/navbar_new";
 
 const FavoritesPage = () => {
   const [favoriteDestinations, setFavoriteDestinations] = useState([]);
@@ -97,7 +97,7 @@ const FavoritesPage = () => {
                   Start exploring and save destinations you love
                 </p>
                 <Link
-                  href="/pages/destination"
+                  href="/pages/destination/"
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
                 >
                   Explore Destinations
@@ -110,10 +110,10 @@ const FavoritesPage = () => {
                     key={destination.id}
                     className="relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all group"
                   >
-                    <Link href={`/destination/${destination.id}`}>
+                    <Link href={`destination/${destination.id}`}>
                       <div className="h-78 overflow-hidden">
                         <img
-                          src={destination.image}
+                          src={destination.images[0]}
                           alt={destination.name}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
@@ -155,7 +155,7 @@ const FavoritesPage = () => {
                   Start exploring and save hotels you love
                 </p>
                 <Link
-                  href="/pages/hotelsactivity"
+                  href="/pages/hotelspage"
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
                 >
                   Explore Hotels
@@ -189,7 +189,7 @@ const FavoritesPage = () => {
                           <div className="flex items-center mb-2">
                             <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
                             <Link
-                              href={`/destination/${destination.id}`}
+                              href={`/pages/destination/${destination.id}`}
                               className="text-sm text-gray-600 hover:text-wanderwise-secondary"
                             >
                               {destination.name}, {destination.country}
@@ -234,7 +234,7 @@ const FavoritesPage = () => {
                   Start exploring and save activities you love
                 </p>
                 <Link
-                  href="/pages/hotelsactivity"
+                  href="/pages/activitypage"
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors"
                 >
                   Explore Activities
@@ -271,7 +271,7 @@ const FavoritesPage = () => {
                           <div className="flex items-center mb-2">
                             <MapPin className="w-4 h-4 text-wanderwise-secondary mr-1" />
                             <Link
-                              href={`/destination/${destination.id}`}
+                              href={`/pages/destination/${destination.id}`}
                               className="text-sm text-gray-600 hover:text-wanderwise-secondary"
                             >
                               {destination.name}, {destination.country}

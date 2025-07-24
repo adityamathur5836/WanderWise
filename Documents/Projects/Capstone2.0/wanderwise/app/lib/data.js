@@ -8,7 +8,7 @@ export const featuredDestinations = [
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2400&q=80",
     images: [
       "https://plus.unsplash.com/premium_photo-1675419759916-9409c6dd5df8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fHNhbnRvcmluaXxlbnwwfHwwfHx8MA%3D%3D",
-      "hhttps://images.unsplash.com/photo-1671556024985-08534340bee9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2FudG9yaW5pfGVufDB8fDB8fHww",
+      "https://images.unsplash.com/photo-1671556024985-08534340bee9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2FudG9yaW5pfGVufDB8fDB8fHww",
       "https://images.unsplash.com/photo-1716573120993-8f3719fcd486?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2FudG9yaW5pfGVufDB8fDB8fHww",
       "https://images.unsplash.com/photo-1672661164583-cf778e8ea716?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHNhbnRvcmluaXxlbnwwfHwwfHx8MA%3D%3D",
       "https://images.unsplash.com/photo-1604145195376-e2c8195adf29?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHNhbnRvcmluaXxlbnwwfHwwfHx8MA%3D%3D"
@@ -428,25 +428,21 @@ export const activities = [
 // API-based Helper Functions for DummyJSON
 
 export const getAllDestinations = async () => {
-  const res = await fetch('https://dummyjson.com/c/be9d-99e5-4b99-b518');
+  const res = await fetch('https://dummyjson.com/c/96dd-82d6-4e13-9b00');
   const data = await res.json();
   console.log(data)
   return Array.isArray(data) ? data : [];
 };
-
-export const getDestinationById = async (id) => {
-  const destinations = await getAllDestinations();
-  return destinations.find(dest => String(dest.id) === String(id)) || null;
-};
-
 // Placeholder: You can implement similar API endpoints for hotels/activities if available
-export const getHotelsByDestination = async (destinationId) => {
-  // No hotels endpoint in DummyJSON, return empty array or implement if you have a hotels API
-  return [];
+export const getDestinationById = (id) => {
+  return allDestinations.find(dest => dest.id === id);
 };
 
-export const getActivitiesByDestination = async (destinationId) => {
-  // No activities endpoint in DummyJSON, return empty array or implement if you have an activities API
-  return [];
+export const getHotelsByDestination = (destinationId) => {
+  return hotels.filter(hotel => hotel.destinationId === destinationId);
+};
+
+export const getActivitiesByDestination = (destinationId) => {
+  return activities.filter(activity => activity.destinationId === destinationId);
 };
 

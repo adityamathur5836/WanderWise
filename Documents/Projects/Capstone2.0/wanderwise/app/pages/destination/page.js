@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Search} from 'lucide-react';
-import Navbar from "../../components/Navbar/navbar";
+import { Search } from 'lucide-react';
+import Navbar from "../../components/Navbar/navbar_new";
 import DestinationCard from "../../components/DestinationCard/destinationcard.jsx";
 import Image from "next/image";
-import { getAllDestinations } from "@/app/lib/data";
+import Footer from "@/app/components/Footer/footer";
 
 const PAGE_SIZE = 9;
 
@@ -17,15 +17,17 @@ export default function DestinationsPage() {
   const [sortBy, setSortBy] = useState('name');
   const [page, setPage] = useState(0);
 
-  // Fetch cities from your Amadeus proxy API
+  // Fetch hotels from dummyjson API
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
         setLoading(true);
         setError(null);
-  
-        const data = await getAllDestinations();
+
+        const response = await fetch("https://dummyjson.com/c/b549-fc13-48b5-9b9d");
+        const data = await response.json();
         setDestinations(data);
+        console.log(data)
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err.message);
@@ -34,7 +36,7 @@ export default function DestinationsPage() {
         setLoading(false);
       }
     };
-  
+
     fetchDestinations();
   }, []);
 
@@ -46,7 +48,7 @@ export default function DestinationsPage() {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       filtered = filtered.filter(dest =>
-        dest.name.toLowerCase().includes(q) || dest.country.toLowerCase().includes(q)
+        dest.name.toLowerCase().includes(q) || dest.location?.toLowerCase().includes(q)
       );
     }
 
@@ -56,13 +58,13 @@ export default function DestinationsPage() {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'country':
-        filtered.sort((a, b) => a.country.localeCompare(b.country));
+        filtered.sort((a, b) => (a.location || '').localeCompare(b.location || ''));
         break;
       case 'rating':
         filtered.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
         break;
       case 'price':
-        filtered.sort((a, b) => a.priceLevel - b.priceLevel);
+        filtered.sort((a, b) => a.price - b.price);
         break;
     }
 
@@ -77,7 +79,7 @@ export default function DestinationsPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative h-[70vh] bg-cover bg-center overflow-hidden">
+      <div className="relative h-[70vh] bg-cover bg-center overflow-hidden mt-18">
         <Image
           src="https://images.unsplash.com/photo-1752503650851-cbc3f8b00679?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8NnNNVmpUTFNrZVF8fGVufDB8fHx8fA%3D%3D"
           alt="Travel Hero"
@@ -147,7 +149,7 @@ export default function DestinationsPage() {
             {totalPages > 1 && (
               <div className="flex justify-center mt-12 space-x-2">
                 {Array.from({ length: totalPages }, (_, idx) => (
-                <button
+                  <button
                     key={idx}
                     onClick={() => setPage(idx)}
                     className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${
@@ -155,15 +157,16 @@ export default function DestinationsPage() {
                         ? "bg-blue-600 text-white"
                         : "bg-white text-blue-600 border border-blue-600 hover:bg-blue-100"
                     }`}
-                >
+                  >
                     {idx + 1}
-                </button>
+                  </button>
                 ))}
               </div>
             )}
           </>
         )}
       </div>
+      <Footer />
     </div>
   );
 }

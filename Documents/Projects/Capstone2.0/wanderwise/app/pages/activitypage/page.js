@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useMemo } from "react";
-import Navbar from "@/app/components/Navbar/navbar";
+import Navbar from "@/app/components/Navbar/navbar_new";
 import Footer from "@/app/components/Footer/footer";
 
 const PAGE_SIZE = 9;
@@ -151,7 +151,7 @@ export default function ActivitiesPage() {
                 </div>
                 <div className="mt-6">
                   <a
-                    href={`/pages/activity/${activity.id}`}
+                    href={`/pages/activities/${activity.id}`}
                     className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
                   >
                     View Details

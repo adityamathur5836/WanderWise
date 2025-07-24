@@ -2,7 +2,7 @@ import CallToAction from "./components/CallToAction/calltoaction";
 import FeaturedDestinations from "./components/FeaturedDestination/featureddestination";
 import Footer from "./components/Footer/footer";
 import Hero from "./components/Hero/Hero";
-import Navbar from "./components/Navbar/navbar";
+import Navbar from "./components/Navbar/navbar_new";
 import TestimonialsSection from "./components/Testimonials/testimonials";
 import WhyChooseUs from "./components/WhyChooseUs/whychooseus";
 

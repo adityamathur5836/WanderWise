@@ -7,7 +7,7 @@ import { Star, MapPin, Heart, ChevronLeft, ChevronRight, Clock, Users } from "lu
 import { activities, getDestinationById } from "../../lib/data";
 import { isInFavorites, saveToFavorites, removeFromFavorites } from "../../lib/localStorage";
 import { toast } from "../../components/ui/sonner";
-import Navbar from "../../components/Navbar/navbar";
+import Navbar from "../../components/Navbar/navbar_new";
 import Footer from "../../components/Footer/footer";
 
 export default function ActivityDetailPage() {

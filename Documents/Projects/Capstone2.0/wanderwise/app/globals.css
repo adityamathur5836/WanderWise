@@ -1,1 +1,71 @@
 @import "tailwindcss";
+
+/* Custom responsive utilities */
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.search-bar {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Animation utilities */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile-first responsive text */
+.responsive-text-sm {
+  @apply text-sm sm:text-base;
+}
+
+.responsive-text-base {
+  @apply text-base sm:text-lg;
+}
+
+.responsive-text-lg {
+  @apply text-lg sm:text-xl;
+}
+
+.responsive-text-xl {
+  @apply text-xl sm:text-2xl;
+}
+
+.responsive-text-2xl {
+  @apply text-2xl sm:text-3xl;
+}
+
+.responsive-text-3xl {
+  @apply text-3xl sm:text-4xl lg:text-5xl;
+}
+
+/* Container utilities */
+.container-responsive {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Grid utilities */
+.grid-responsive-1-2-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+}
+
+.grid-responsive-1-2-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6;
+}
+
+/* Spacing utilities */
+.section-padding {
+  @apply py-12 sm:py-16 lg:py-20;
+}
+
+.section-padding-sm {
+  @apply py-8 sm:py-12 lg:py-16;
+}
